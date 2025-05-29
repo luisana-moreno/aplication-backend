@@ -1,4 +1,3 @@
-import { pool } from "../db.js";
 import { getU,getUid, deleteUid, postU, putUid } from "../models/users.model.js";
 
 export const getUser = async (req, res) => {

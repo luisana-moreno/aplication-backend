@@ -1,11 +1,10 @@
 import {Router} from 'express'
 import { getUser, getUserid, deleteUserid, postUser, putUser} from '../controllers/users.controllers.js';
-import { pool } from '../db.js';
 
 
 const router = Router();
 
-router.get('/users',getUser)
+router.get('/users',getUser) 
 
 router.get('/users/:id',getUserid)
 
