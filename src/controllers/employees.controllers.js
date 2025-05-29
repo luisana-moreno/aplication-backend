@@ -12,7 +12,7 @@ export const getEmp = async (req, res) => {
 };
 
 
-export const getEmpid = async (req, res) => {
+export const getEmpi = async (req, res) => {
     try{
         const {id} = req.params;
         const rows = await getEid (id);
@@ -33,7 +33,7 @@ export const getEmpid = async (req, res) => {
 export const postEmp = async (req, res) => {
     try {
         const data = req.body;
-        const employee = await postE(data);
+        const employee = await postE();
         res.json(employee)[0]
 
 

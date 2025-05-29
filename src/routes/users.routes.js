@@ -6,12 +6,12 @@ const router = Router();
 
 router.get('/users',getUser) 
 
-router.get('/users/:id',getUserid)
+router.get('/users',getUserid)
 
 
 router.post('/users', postUser)
 
-router.put('/users/:id', putUser)
+router.put('/user/:id', putUser)
 
 router.delete('/users/:id',deleteUserid)
 

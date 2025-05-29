@@ -6,7 +6,7 @@ export const getU = async (req, res) =>{
 }
 //get id
 export const getUid = async (id) =>{
-    const {rows} = await pool.query ('SELECT * FROM "user" WHERE  id_user=$1', [id])
+    const {rows} = await pool.query ('SELECT * FROM "users" WHERE  id_user=$1', [id])
     return rows [0]
 }
 //post
@@ -47,6 +47,6 @@ export const putUid = async (id, data) => {
 
 //delete
 export const deleteUid = async (id) =>{
-    const {rowCount} = await pool.query ('DELETE FROM "user" WHERE id_user=$1 ' , [id])
+    const {rowCount} = await pool.query ('DELETE "user" WHERE id_user=$1 ' , [id])
     return rowCount
 }  

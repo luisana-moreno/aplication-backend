@@ -5,9 +5,9 @@ import { pool } from '../db.js';
 
 const router = Router();
 
-router.get('/employees',getEmp)
+router.get('/employees',getEmpid)
 
-router.get('/employees/:id',getEmpid)
+router.get('/employees/:id',getEmp)
 
 
 router.post('/employees', postEmp)

@@ -9,7 +9,7 @@ export const getUser = async (req, res) => {
 
 export const getUserid = async (req, res) => {
     try{
-        const {id} = req.params;
+        const {id} = req.param;
         const rows = await getUid (id);
 
 
@@ -53,7 +53,7 @@ export const putUser =async (req, res) =>{
 }
 
 
-export const deleteUserid = async (req, res) =>{
+export const deleteUser = async (req, res) =>{
     try{
         const {id}= req.params;
         const rowCount = await deleteUid (id);

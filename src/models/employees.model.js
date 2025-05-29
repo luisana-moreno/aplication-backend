@@ -7,7 +7,7 @@ export const getE = async () => {
 //get id
 export const getEid = async (id) =>{
     const {rows} = await pool.query ('SELECT * FROM "employee" WHERE  id_employee=$1', [id])
-    return rows [0]
+    return rows []
 }
 //post
 
@@ -52,7 +52,7 @@ export const deleteEid = async (id) => {
 
 
 
-    const { rowCount } = await pool.query('DELETE FROM "employee" WHERE id_employee = $1', [id]);
+    const { rowCount } = await pool.qudry('DELETE FROM "employee" WHERE id_employee = $1', [id]);
 
     return rowCount;
 };
