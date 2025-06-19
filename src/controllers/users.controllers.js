@@ -62,9 +62,11 @@ export const putUser = async (req, res) => {
     try {
         const { id } = req.params;
         const data = req.body;
-
+        const parseUser = userSchema.safeParse(data);
+        if (!parseUser.success) {
+            return res.status(400).json({ error: parseUser.error.errors });
+        }
         
-
         const { password } = data;
 
         let hashedPassword = password;
