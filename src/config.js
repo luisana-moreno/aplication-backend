@@ -6,4 +6,4 @@ export const DB_PASSWORD = "1234";
 export const DB_HOST = "localhost";
 export const DB_PORT = 5432;
 export const DB_DATABASE = "finca_laguna";
-
+export const TOKEN_SECRET = "token*"

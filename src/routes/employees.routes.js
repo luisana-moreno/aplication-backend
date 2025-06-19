@@ -1,16 +1,14 @@
 import {Router} from 'express'
-import {getEmp, getEmpid, postEmp, putEmpid, deleteEmpid } from '../controllers/employees.controllers.js';
-import { pool } from '../db.js';
+import {getEmpid, getEmp, postEmp, putEmpid, deleteEmpid } from '../controllers/employees.controllers.js';
 
 
 const router = Router();
 
-router.get('/employees',getEmpid)
+router.get('/employees',getEmp)
 
-router.get('/employees/:id',getEmp)
+router.get('/employees/:id',getEmpid)
 
-
-router.post('/employees', postEmp)
+router.post('/employees', postEmp) 
 
 router.put('/employees/:id', putEmpid)
 

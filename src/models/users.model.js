@@ -1,17 +1,17 @@
 import { pool } from "../db.js";
 //get
-export const getU = async (req, res) =>{
+export const getUsers = async (req, res) =>{
     const {rows} = await pool.query ('SELECT * FROM "user"')
     return rows
 }
 //get id
-export const getUid = async (id) =>{
-    const {rows} = await pool.query ('SELECT * FROM "users" WHERE  id_user=$1', [id])
-    return rows [0]
+export const getUsersid = async (id) =>{
+    const {rows} = await pool.query ('SELECT * FROM "user" WHERE  id_user=$1', [id])
+    return rows 
 }
 //post
 
-export const postU = async (data) => {
+export const postUsers = async (data) => {
     const query = 
         'INSERT INTO "user" (password, name, last_name, email, phone, rol) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *'
     const values = [
@@ -19,7 +19,7 @@ export const postU = async (data) => {
         data.name,
         data.last_name,
         data.email,
-        data.phone,
+        data.phone, 
         data.rol
     ];
 
@@ -28,16 +28,17 @@ export const postU = async (data) => {
 }
 
 //put
-export const putUid = async (id, data) => {
+export const putUsersid = async (id, data) => {
     const query = 
-        'UPDATE "user" SET password =$1, name = $2, last_name = $3, email = $4, phone = $5, rol = $6 RETURNING *'
+        'UPDATE "user" SET password =$1, name = $2, last_name = $3, email = $4, phone = $5, rol = $6 WHERE id_user=$7 RETURNING *'
     const values = [
         data.password,
         data.name,
         data.last_name,
         data.email,
         data.phone,
-        data.rol
+        data.rol,
+        id
     ];
 
     const result = await pool.query(query, values);
@@ -46,7 +47,7 @@ export const putUid = async (id, data) => {
 
 
 //delete
-export const deleteUid = async (id) =>{
-    const {rowCount} = await pool.query ('DELETE "user" WHERE id_user=$1 ' , [id])
+export const deleteUsersid = async (id) =>{
+    const {rowCount} = await pool.query ('DELETE from "user" WHERE id_user=$1 ' , [id])
     return rowCount
 }  

@@ -1,10 +1,11 @@
-import { pool } from "../db.js";
-import { getE, getEid, postE, putEid, deleteEid } from "../models/employees.model.js";
+import { getEmployee, getEmployeeid, postEmployee, putEmployeeid, deleteEmployeeid } from "../models/employees.model.js";
+import userSchema  from "../Schemas/employees.schemas.js";
 
 export const getEmp = async (req, res) => {
     try {
-        const empleados = await getE(); 
-        res.status(200).json(empleados);
+        const rows = await getEmployee(); 
+        res.json(rows);
+        
     } catch (error) {
         console.error("Error al obtener empleados:", error.message);
         res.status(500).json({ error: "Error al obtener empleados" });
@@ -12,10 +13,10 @@ export const getEmp = async (req, res) => {
 };
 
 
-export const getEmpi = async (req, res) => {
+export const getEmpid = async (req, res) => {
     try{
         const {id} = req.params;
-        const rows = await getEid (id);
+        const rows = await getEmployeeid (id);
 
 
     if (!rows||rows.length === 0) {
@@ -24,7 +25,7 @@ export const getEmpi = async (req, res) => {
     res.json(rows);
     }
     
-    catch (error){
+    catch (error){ 
         console.error("Error al obtener empleado");
         res.status(500).send("Error al obtener empleado")
     }
@@ -33,7 +34,14 @@ export const getEmpi = async (req, res) => {
 export const postEmp = async (req, res) => {
     try {
         const data = req.body;
-        const employee = await postE();
+        const parseUser = userSchema.safeParse(data);
+
+        if (!parseUser.success) {
+            return res.status(400).json({ 
+                error: parseUser.error.errors });
+        }
+    
+        const employee = await postEmployee(data);
         res.json(employee)[0]
 
 
@@ -47,7 +55,14 @@ export const putEmpid =async (req, res) =>{
     try{
         const {id} = req.params;
         const data = req.body
-        const rows= await putEid (id, data)
+        const parseUser = userSchema.safeParse(data);
+
+        if (!parseUser.success) {
+            return res.status(400).json({ 
+                error: parseUser.error.errors });
+        }
+    
+        const rows= await putEmployeeid (id, data)
         res.json(rows)[0]
     }
 
@@ -61,7 +76,7 @@ export const putEmpid =async (req, res) =>{
 export const deleteEmpid = async (req, res) =>{
     try{
         const {id}= req.params;
-        const rowCount = await deleteEid (id);
+        const rowCount = await deleteEmployeeid (id);
 
 
     if (!rowCount || rowCount.length ===0) {

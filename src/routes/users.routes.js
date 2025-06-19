@@ -6,13 +6,12 @@ const router = Router();
 
 router.get('/users',getUser) 
 
-router.get('/users',getUserid)
-
+router.get('/users/:id',getUserid)
 
 router.post('/users', postUser)
 
-router.put('/user/:id', putUser)
+router.put('/users/:id', putUser)
 
-router.delete('/users/:id',deleteUserid)
+router.delete('/users/:id', deleteUserid)
 
 export default router; 
