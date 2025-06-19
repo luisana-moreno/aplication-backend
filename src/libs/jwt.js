@@ -1,5 +1,5 @@
 import jwt  from "jsonwebtoken";
-const TOKEN_SECRET = process.env.TOKEN_SECRET;
+import {TOKEN_SECRET } from "../config.js";
 
 export function generateToken(payload) {
     return new Promise ((resolve, reject) => {

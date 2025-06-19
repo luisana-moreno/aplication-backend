@@ -3,6 +3,7 @@ import { generateToken } from "../libs/jwt.js";
 import bcrypt from "bcryptjs";
 import handleDatabaseError from "../utils/errors.js";   
 
+
 export const register = async (req, res) => {
     try {
         const data = req.body;
