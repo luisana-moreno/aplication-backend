@@ -1,5 +1,6 @@
 import { getEmployee, getEmployeeid, postEmployee, putEmployeeid, deleteEmployeeid } from "../models/employees.model.js";
 import userSchema  from "../Schemas/employees.schemas.js";
+import handleDatabaseError from "../utils/errors.js";
 
 export const getEmp = async (req, res) => {
     try {
@@ -7,8 +8,7 @@ export const getEmp = async (req, res) => {
         res.json(rows);
         
     } catch (error) {
-        console.error("Error al obtener empleados:", error.message);
-        res.status(500).json({ error: "Error al obtener empleados" });
+        handleDatabaseError(error, res);
     }
 };
 
@@ -26,8 +26,7 @@ export const getEmpid = async (req, res) => {
     }
     
     catch (error){ 
-        console.error("Error al obtener empleado");
-        res.status(500).send("Error al obtener empleado")
+        handleDatabaseError(error, res);
     }
 }
 
@@ -46,8 +45,7 @@ export const postEmp = async (req, res) => {
 
 
     } catch (error) {
-        console.error("Error al insertar empleado:", error);
-        res.status(500).send("Error al insertar empleado");
+        handleDatabaseError(error, res);
     }
 }
 
@@ -67,8 +65,7 @@ export const putEmpid =async (req, res) =>{
     }
 
     catch (error){
-        console.error("Error al editar  empleado:", error);
-        res.status(500).send("Error al editar  empleado");
+        handleDatabaseError(error, res);
     }
 }
 
@@ -86,8 +83,7 @@ export const deleteEmpid = async (req, res) =>{
     }
     
     catch (error){
-        console.error ("Error al obtenet el empleado")
-        res.status(500).send("Error al obtener el empleado")
+        handleDatabaseError(error, res);
     }
     
 }

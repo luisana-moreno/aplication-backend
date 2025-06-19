@@ -1,5 +1,7 @@
 import { getBovine, getBovineid, postBovine, putBovineid, deleteBovineid} from "../models/bovine.models.js";
 import userSchema  from "../Schemas/bovine.schemas.js";
+import handleDatabaseError from "../utils/errors.js";
+
 
 export const getBovines = async (req, res) => {
 
@@ -21,8 +23,7 @@ export const getBovinesid = async (req, res) => {
     } 
     
     catch (error){
-        console.error("Error al obtener bovino");
-        res.status(500).send("Error al obtener bovino")
+        handleDatabaseError(error, res);
     }
 }
 
@@ -41,8 +42,7 @@ export const postBovines = async (req, res) => {
 
 
     } catch (error) {
-        console.error("Error al insertar bovino:", error);
-        res.status(500).send("Error al insertar bovino");
+        handleDatabaseError(error, res);
     }
 }
 
@@ -62,8 +62,7 @@ export const putBovinesid =async (req, res) =>{
     }
 
     catch (error){
-        console.error("Error al editar  bovino:", error);
-        res.status(500).send("Error al editar  bovino");
+        handleDatabaseError(error, res);
     }
 }
 
@@ -71,8 +70,9 @@ export const putBovinesid =async (req, res) =>{
 export const deleteBovinesid = async (req, res) =>{
     try{
         const {id}= req.params;
-        const rowCount = await deleteBovineid (id);
+        const rowCount = await deleteBovineid(id);
 
+        console.log(rowCount);
 
     if (!rowCount || rowCount.length ===0) {
         return res.status(404).json({error:"bovino no encontrado"});
@@ -81,8 +81,7 @@ export const deleteBovinesid = async (req, res) =>{
     }
     
     catch (error){
-        console.error ("Error al obtenet el bovino")
-        res.status(500).send("Error al obtener el bovino")
+        handleDatabaseError(error, res);
     }
     
 }

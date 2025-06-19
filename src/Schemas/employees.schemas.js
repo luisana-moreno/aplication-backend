@@ -13,7 +13,7 @@ const employeeSchemas = z.object({
 
     document_number: z
         .string()
-        .regex(/^[VE]-[0-9]+$/, "El número de documento debe comenzar con V o E seguido de un guion (-) y números")
+        .regex(/^[VE]-[0-9]/, "El número de documento debe comenzar con V o E seguido de un guion (-) y números")
         .min(8, "El número de documento debe tener al menos 8 caracteres")
         .max(10, "El número de documento no puede tener más de 10 caracteres"),
 
@@ -31,7 +31,7 @@ const employeeSchemas = z.object({
     phone: z
         .string()
         .max(11, "El número no puede tener más de 11 caracteres")
-        .regex(/^[0-9]+$/, "El teléfono solo debe contener números"),
+        .regex(/[0-9]/, "El teléfono solo debe contener números"),
 
     position: z.enum(["manager", "dairy_manager", "veterinarian", "transportation_manager", "worker", "pasture_manager"]),
 });

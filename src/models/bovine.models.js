@@ -13,7 +13,7 @@ export const getBovineid = async (id) =>{
 
 export const postBovine = async (data) => {
     const query = 
-        'INSERT INTO "bovine" (bovine_number, breed_bovine, date_birth, color, weight, stage_bovine, statu_bovine) VALUES ($1, $2, $3, $4, $5, $6, $7)RETURNING *'
+        'INSERT INTO "bovine" (bovine_number, breed_bovine, date_birth, color, weight, stage_bovine, status_bovine) VALUES ($1, $2, $3, $4, $5, $6, $7)RETURNING *'
     const values = [
         data.bovine_number,
         data.breed_bovine,
@@ -31,7 +31,7 @@ export const postBovine = async (data) => {
 //put
 export const putBovineid = async (id, data) => {
     const query = 
-        'UPDATE "bovine" SET bovine_number = $1, breed_bovine = $2,  date_birth = $3, color = $4, weight = $5, stage_bovine = $6 statu_bovine =$7 RETURNING *'
+        'UPDATE "bovine" SET bovine_number = $1, breed_bovine = $2,  date_birth = $3, color = $4, weight = $5, stage_bovine = $6, status_bovine =$7 WHERE id_user=$8   RETURNING *'
     const values = [
         data.bovine_number,
         data.breed_bovine,
@@ -39,7 +39,8 @@ export const putBovineid = async (id, data) => {
         data.color,
         data.weight, 
         data.stage_bovine,
-        data.status_bovine
+        data.status_bovine,
+        id
     ];
 
     const result = await pool.query(query, values);
@@ -49,6 +50,6 @@ export const putBovineid = async (id, data) => {
 
 //delete
 export const deleteBovineid = async (id) =>{
-    const {rowCount} = await pool.query ('DELETE "bovine" WHERE id_bovine=$1 ' , [id])
+    const {rowCount} = await pool.query ('DELETE  from "bovine" WHERE id_bovine=$1 ' , [id])
     return rowCount [0]
 }  

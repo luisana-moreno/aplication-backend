@@ -1,6 +1,7 @@
 import { registerUser, loginUser } from "../models/login.models.js";
 import { generateToken } from "../libs/jwt.js";
 import bcrypt from "bcryptjs";
+import handleDatabaseError from "../utils/errors.js";   
 
 export const register = async (req, res) => {
     try {
@@ -35,8 +36,8 @@ export const register = async (req, res) => {
             user: newUser,
         });
     } catch (error) {
-        console.error("Error al registrar usuario:", error);
-        res.status(500).json({ error: "Error al registrar usuario" });
+    handleDatabaseError(error, res);
+
     }
 };
 
@@ -77,8 +78,7 @@ export const login = async (req, res) => {
             user: userWithoutPassword,
         });
     } catch (error) {
-        console.error("Error al iniciar sesión:", error);
-        res.status(500).json({ error: "Error al iniciar sesión" });
+        handleDatabaseError(error, res);
     }
 };
 
@@ -87,5 +87,6 @@ export const logout = (req, res) => {
         expires: new Date(0),
     });
     res.status(200).json({ message: "Sesión cerrada correctamente" });
+    
 };
 

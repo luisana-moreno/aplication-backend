@@ -6,7 +6,7 @@ export function generateToken(payload) {
         jwt.sign(
             payload,
             TOKEN_SECRET,
-            {expiresIn: '1h'},
+            {expiresIn: '24h'},
             (err, token) => {
                 if (err) {
                     reject(err);

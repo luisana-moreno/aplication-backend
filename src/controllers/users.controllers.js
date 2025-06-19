@@ -1,6 +1,7 @@
 import { getUsers,getUsersid, deleteUsersid, postUsers, putUsersid } from "../models/users.model.js";
 import userSchema  from "../Schemas/users.schemas.js";
 import bcrypt from "bcryptjs";
+import handleDatabaseError from "../utils/errors.js";   
 
 export const getUser = async (req, res) => {
 
@@ -23,6 +24,7 @@ export const getUserid = async (req, res) => {
     
     catch (error){
         res.status(500).json({ message: error.message })
+        handleDatabaseError(error, res);
     }
 }
 
@@ -52,6 +54,7 @@ export const postUser = async (req, res) => {
 
     } catch (error) {
         res.status(500).json({ message: error.message })
+        handleDatabaseError(error, res);
     }
 }
 
@@ -77,8 +80,7 @@ export const putUser = async (req, res) => {
 
         res.status(200).json(users);
     } catch (error) {
-        console.error("Error al actualizar usuario:", error);
-        res.status(500).json({ message: error.message });
+        handleDatabaseError(error, res);
     }
 };
 
@@ -96,6 +98,7 @@ export const deleteUserid = async (req, res) =>{
     
     catch (error){
         res.status(500).json({ message: error.message })
+        handleDatabaseError(error, res);
     }
     
 }
