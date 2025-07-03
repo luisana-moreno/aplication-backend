@@ -1,5 +1,5 @@
 import { getBovine, getBovineid, postBovine, putBovineid, deleteBovineid} from "../models/bovine.models.js";
-import userSchema  from "../Schemas/bovine.schemas.js";
+import userSchema  from "../schemas/bovine.schemas.js";
 import handleDatabaseError from "../utils/errors.js";
 
 
@@ -85,3 +85,19 @@ export const deleteBovinesid = async (req, res) =>{
     }
     
 }
+
+// Obtener bovinos filtrados
+export const getFilteredBovines = async (req, res) => {
+    try {
+        const filters = req.query; // Los filtros se envían como parámetros de consulta
+        const rows = await getFilteredBovine(filters);
+
+        if (!rows || rows.length === 0) {
+            return res.status(404).json({ error: "No se encontraron bovinos con los filtros especificados" });
+        }
+
+        res.json(rows);
+    } catch (error) {
+        handleDatabaseError(error, res);
+    }
+};

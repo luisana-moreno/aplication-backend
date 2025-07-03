@@ -9,17 +9,15 @@ export const getUsersid = async (id) =>{
     const {rows} = await pool.query ('SELECT * FROM "user" WHERE  id_user=$1', [id])
     return rows 
 }
-//post
+//post 
 
 export const postUsers = async (data) => {
     const query = 
-        'INSERT INTO "user" (password, name, last_name, email, phone, rol) VALUES ($1, $2, $3, $4, $5, $6)RETURNING *'
+        'INSERT INTO "user" (password, username,  email, rol) VALUES ($1, $2, $3, $4)RETURNING *'
     const values = [
         data.password,
-        data.name,
-        data.last_name,
-        data.email,
-        data.phone, 
+        data.username,
+        data.email, 
         data.rol
     ];
 
@@ -30,13 +28,11 @@ export const postUsers = async (data) => {
 //put
 export const putUsersid = async (id, data) => {
     const query = 
-        'UPDATE "user" SET password =$1, name = $2, last_name = $3, email = $4, phone = $5, rol = $6 WHERE id_user=$7 RETURNING *'
+        'UPDATE "user" SET password =$1, username = $2,  email = $3, rol = $4 WHERE id_user=$5 RETURNING *'
     const values = [
         data.password,
-        data.name,
-        data.last_name,
+        data.username,
         data.email,
-        data.phone,
         data.rol,
         id
     ];

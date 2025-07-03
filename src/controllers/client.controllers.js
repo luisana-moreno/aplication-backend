@@ -1,26 +1,26 @@
-import { getEmployee, getEmployeeid, postEmployee, putEmployeeid, deleteEmployeeid } from "../models/employees.model.js";
-import userSchema  from "../schemas/employees.schemas.js";
+import { getClient, getClientid, postClient, putClientid, deleteClientid } from "../models/client.models.js";
+import clientSchemas from "../Schemas/client.shemas.js";
 import handleDatabaseError from "../utils/errors.js";
 
-export const getEmp = async (req, res) => {
+export const getClients = async (req, res) => {
     try {
-        const rows = await getEmployee(); 
+        const rows = await getClient(); 
         res.json(rows);
         
     } catch (error) {
         handleDatabaseError(error, res);
-    } 
+    }
 };
 
 
-export const getEmpid = async (req, res) => {
+export const getClientsid = async (req, res) => {
     try{
         const {id} = req.params;
-        const rows = await getEmployeeid (id);
+        const rows = await getClientid (id);
 
 
     if (!rows||rows.length === 0) {
-        return res.status(404).json({ error: "empleado no encontrado" });
+        return res.status(404).json({ error: "cliente no encontrado" });
     }
     res.json(rows);
     }
@@ -30,7 +30,7 @@ export const getEmpid = async (req, res) => {
     }
 }
 
-export const postEmp = async (req, res) => {
+export const postClients = async (req, res) => {
     try {
         const data = req.body;
         const parseUser = userSchema.safeParse(data);
@@ -40,8 +40,8 @@ export const postEmp = async (req, res) => {
                 error: parseUser.error.errors });
         }
     
-        const employee = await postEmployee(data);
-        res.json(employee)[0]
+        const client = await postClient(data);
+        res.json(client)[0]
 
 
     } catch (error) {
@@ -49,7 +49,7 @@ export const postEmp = async (req, res) => {
     }
 }
 
-export const putEmpid =async (req, res) =>{
+export const putClientsid =async (req, res) =>{
     try{
         const {id} = req.params;
         const data = req.body
@@ -60,7 +60,7 @@ export const putEmpid =async (req, res) =>{
                 error: parseUser.error.errors });
         }
     
-        const rows= await putEmployeeid (id, data)
+        const rows= await putClientid (id, data)
         res.json(rows)[0]
     }
 
@@ -70,16 +70,16 @@ export const putEmpid =async (req, res) =>{
 }
 
 
-export const deleteEmpid = async (req, res) =>{
+export const deleteClientsid = async (req, res) =>{
     try{
         const {id}= req.params;
-        const rowCount = await deleteEmployeeid (id);
+        const rowCount = await deleteClientid (id);
 
 
     if (!rowCount || rowCount.length ===0) {
-        return res.status(404).json({error:"empleado no encontrado"});
+        return res.status(404).json({error:"cliente no encontrado"});
     }
-    res.json("empleado eliminado exitosamente");
+    res.json("cliente eliminado exitosamente");
     }
     
     catch (error){

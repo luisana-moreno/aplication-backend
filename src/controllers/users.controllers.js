@@ -1,5 +1,5 @@
 import { getUsers,getUsersid, deleteUsersid, postUsers, putUsersid } from "../models/users.model.js";
-import userSchema  from "../Schemas/users.schemas.js";
+import userSchema  from "../schemas/users.schemas.js";
 import bcrypt from "bcryptjs";
 import handleDatabaseError from "../utils/errors.js";   
 
@@ -7,7 +7,6 @@ export const getUser = async (req, res) => {
 
         const rows = await getUsers();  
         res.json(rows);
-
 }
 
 export const getUserid = async (req, res) => {
