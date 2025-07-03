@@ -58,6 +58,7 @@ export const postUser = async (req, res) => {
 }
 
 export const putUser = async (req, res) => {
+    
     try {
         const { id } = req.params;
         const data = req.body;

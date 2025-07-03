@@ -1,5 +1,9 @@
 import pg, { Query } from 'pg'
 import { DB_DATABASE, DB_HOST, DB_PASSWORD, DB_PORT, DB_USER } from './config.js'
+
+
+
+
 const { Pool } = pg
 
 
